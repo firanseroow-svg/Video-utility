@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>YouTube Downloader FHD</title>
+<style>
+body {
+    font-family: Arial;
+    background: #0f172a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.box {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 10px;
+    width: 350px;
+}
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+button {
+    background: #22c55e;
+    border: none;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+    <h2>YouTube Downloader 1080p</h2>
+    <input id="url" placeholder="Tempel link YouTube">
+    <button onclick="download()">Download</button>
+    <p id="status"></p>
+</div>
+
+<script>
+function download() {
+    const url = document.getElementById("url").value;
+    fetch("/download", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({url})
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("status").innerText =
+            data.success || data.error;
+    });
+}
+</script>
+
+</body>
+</html>
